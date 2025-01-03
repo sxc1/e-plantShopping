@@ -1,1 +1,2 @@
-# coding-project-template
+# E-commerce Plant Storefront
+Hello! I've developed this e-commerce storefront as part of the final project for the [Developing Front-End Apps with React](https://www.coursera.org/learn/developing-frontend-apps-with-react) Coursera course. I've also [published the website](https://sxc1.github.io/e-plantShopping/) so you can try it out yourself!
