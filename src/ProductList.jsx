@@ -2,13 +2,13 @@ import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { useDispatch } from 'react-redux';
-import { addItem } from './CartSlice';
+import { addItem, removeItem } from './CartSlice';
 function ProductList() {
     const dispatch = useDispatch();
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
-    const cartSize = Object.keys(addedToCart).length;
+    const cartSize = Object.values(addedToCart).filter(value => value === true).length;
 
     const plantsArray = [
         {
@@ -267,6 +267,16 @@ function ProductList() {
         }));
     };
 
+    const handleRemoveFromCart = (product) => {
+        if (addedToCart[product.name]) {
+            dispatch(removeItem(product.name));
+            setAddedToCart((prevState) => ({
+                ...prevState,
+                [product.name]: false,
+            }));
+        }
+    }
+
     return (
         <div>
              <div className="navbar" style={styleObj}>
@@ -312,7 +322,10 @@ function ProductList() {
                 ))}
             </div>
             ) :  (
-                <CartItem onContinueShopping={handleContinueShopping}/>
+                <CartItem
+                    onContinueShopping={handleContinueShopping}
+                    onRemoveItem={handleRemoveFromCart}
+                />
         )}
     </div>
     );
